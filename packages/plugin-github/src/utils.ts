@@ -30,4 +30,4 @@ export const eagerPromises = (
     promises: Promise<any>[],
     logger: Logger = console,
 ): // eslint-disable-next-line @typescript-eslint/no-explicit-any
-Promise<any> => Promise.all(promises.map(p => p.catch(logger.error)))
+Promise<any> => Promise.all(promises.map((p) => p.catch(logger.error)))

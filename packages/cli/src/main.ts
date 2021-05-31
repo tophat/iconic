@@ -8,23 +8,23 @@ import { getLogger, default as rvgCore } from '@react-vector-graphics/core'
 
 import * as conf from './config'
 
-const configResultHandler = (config: Configuration, logger: Logger) => (
-    result: CosmiconfigResult,
-): void => {
-    if (result?.filepath && !result.isEmpty) {
-        logger.info(`Loaded config from ${result.filepath}`)
-        Object.assign(config, result.config)
-        const configDir = path.dirname(result.filepath)
-        if (configDir !== process.cwd()) {
-            logger.info(`Changing current directory to ${configDir}`)
-            process.chdir(configDir)
+const configResultHandler =
+    (config: Configuration, logger: Logger) =>
+    (result: CosmiconfigResult): void => {
+        if (result?.filepath && !result.isEmpty) {
+            logger.info(`Loaded config from ${result.filepath}`)
+            Object.assign(config, result.config)
+            const configDir = path.dirname(result.filepath)
+            if (configDir !== process.cwd()) {
+                logger.info(`Changing current directory to ${configDir}`)
+                process.chdir(configDir)
+            }
+        } else if (result?.isEmpty) {
+            logger.info(`Skipping empty config at ${result.filepath}`)
+        } else {
+            logger.info('No config loaded')
         }
-    } else if (result?.isEmpty) {
-        logger.info(`Skipping empty config at ${result.filepath}`)
-    } else {
-        logger.info('No config loaded')
     }
-}
 
 const getConfig = async (
     config: Configuration,

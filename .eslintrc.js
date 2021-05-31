@@ -1,7 +1,7 @@
 module.exports = {
     extends: [
         'plugin:@typescript-eslint/recommended',
-        'prettier/@typescript-eslint',
+        'plugin:prettier/recommended',
         '@tophat/eslint-config/base',
         '@tophat/eslint-config/jest',
     ],

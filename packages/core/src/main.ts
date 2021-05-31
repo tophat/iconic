@@ -35,7 +35,7 @@ export const run = async ({
             loadConfig(config),
         ])
         const results = await Promise.all(
-            pluginParams.splice(0).map(async params => {
+            pluginParams.splice(0).map(async (params) => {
                 const result = await pluginFn(
                     params.code,
                     pluginConfig,
@@ -44,7 +44,7 @@ export const run = async ({
                 )
                 return (Array.isArray(result) ? result : [result])
                     .filter(Boolean)
-                    .map(r => normalizePluginParams(r, params))
+                    .map((r) => normalizePluginParams(r, params))
             }),
         )
         pluginParams.push(...pluginParams.concat(...results))
